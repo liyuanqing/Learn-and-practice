@@ -3,7 +3,12 @@ http://www.ruanyifeng.com/blog/2016/11/javascript.html   //阮一峰全站培训
 https://github.com/dvajs/dva                            //dva(react和redux的轻量框架)
 http://recharts.org/                                     //ReCharts 是一个 React 图表组件库。
 https://react-bootstrap.github.io/                      //React-Bootstrap(reactUI框架)
+
+
 vue相关
+http://cn.vuejs.org/v2/guide/                           //vue2.0 api
+https://vux.li/#!/                                      //vueUI框架（微信）
+
 
 
 微信开发相关
