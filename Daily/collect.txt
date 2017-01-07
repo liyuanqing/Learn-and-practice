@@ -14,6 +14,9 @@ https://vux.li/#!/                                      //vueUI框架（微信�
 微信开发相关
 http://www.jb51.net/Special/879.htm     //js微信功能
 
+git教程
+http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000   //廖雪峰git教程
+
 
 其他
 http://www.cnblogs.com/EasonJim/p/6178402.html  //前端接口安全加密研究
