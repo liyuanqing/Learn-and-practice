@@ -6,3 +6,115 @@ react全家桶：
 4、ES6(babel转译)
 5、路由（react-router）
 6、Flux（Flux库——Redux）
+
+
+js原生ajax
+        function ajax() {
+                  //先声明一个异步请求对象
+                  var xmlHttpReg = null;
+                  if (window.ActiveXObject) {//如果是IE
+                      xmlHttpReg = new ActiveXObject("Microsoft.XMLHTTP");
+                  } else if (window.XMLHttpRequest) {
+                       xmlHttpReg = new XMLHttpRequest(); //实例化一个xmlHttpReg
+                  }
+                   //如果实例化成功,就调用open()方法,就开始准备向服务器发送请求
+                   if (xmlHttpReg != null) {
+                       xmlHttpReg.open("get", "About.aspx", true);
+                       xmlHttpReg.send(null);
+                       xmlHttpReg.onreadystatechange = doResult; //设置回调函数
+                   }
+                   //回调函数
+                   //一旦readyState的值改变,将会调用这个函数,readyState=4表示完成相应
+                //存有 XMLHttpRequest 的状态。从 0 到 4 发生变化。
+                //0: 请求未初始化
+                //1: 服务器连接已建立
+                //2: 请求已接收
+                //3: 请求处理中
+                //4: 请求已完成，且响应已就绪
+                   //设定函数doResult()
+                   function doResult() {
+                       if (xmlHttpReg.readyState == 4) {//4代表执行完成
+                           if (xmlHttpReg.status == 200) {//200代表执行成功
+                               //将xmlHttpReg.responseText的值赋给ID为resText的元素
+                               document.getElementById("resText").innerHTML = xmlHttpReg.responseText;
+                           }
+                       }
+                   }
+               }
+
+js方jq实现ajax
+      //实现代码
+        function ajax(){
+         //获取ajax的相应值（请求类型，请求地址，同步或异步，传递数据，接收数据类型，成功失败函数等）
+          var ajaxData = {
+            type:arguments[0].type || "GET",
+            url:arguments[0].url || "",
+            async:arguments[0].async || "true",
+            data:arguments[0].data || null,
+            dataType:arguments[0].dataType || "text",
+            contentType:arguments[0].contentType || "application/x-www-form-urlencoded",
+            beforeSend:arguments[0].beforeSend || function(){},
+            success:arguments[0].success || function(){},
+            error:arguments[0].error || function(){}
+          }
+          ajaxData.beforeSend()
+          var xhr = createxmlHttpRequest();    //创建 XMLHttpRequest 对象
+          xhr.responseType=ajaxData.dataType;  //预期服务器返回的数据类型
+          xhr.open(ajaxData.type,ajaxData.url,ajaxData.async);  //规定请求的类型、URL 以及是否异步处理请求
+          xhr.setRequestHeader("Content-Type",ajaxData.contentType);  //发送信息至服务器时内容编码类型(向请求添加 HTTP 头)
+          xhr.send(convertData(ajaxData.data));                     //将请求发送到服务器
+          //当请求被发送到服务器时，我们需要执行一些基于响应的任务。
+          //每当 readyState 改变时，就会触发 onreadystatechange 事件。
+          //readyState 属性存有 XMLHttpRequest 的状态信息。
+          xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4) {
+              if(xhr.status == 200){
+                ajaxData.success(xhr.response)
+              }else{
+                ajaxData.error()
+              }
+            }
+          }
+        }
+        //创建 XMLHttpRequest 对象
+        function createxmlHttpRequest() {
+
+          if (window.ActiveXObject) {
+            // IE6, IE5 浏览器执行代码
+            return new ActiveXObject("Microsoft.XMLHTTP");
+          } else if (window.XMLHttpRequest) {
+             //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+            return new XMLHttpRequest();
+          }
+        }
+        //解析传入的对象
+        function convertData(data){
+          if( typeof data === 'object' ){
+            var convertResult = "" ;
+            for(var c in data){
+              convertResult+= c + "=" + data[c] + "&";
+            }
+            convertResult=convertResult.substring(0,convertResult.length-1)
+            return convertResult;
+          }else{
+            return data;
+          }
+        }
+
+        
+      //调用代码
+      ajax({
+            type:"POST",
+            url:"ajax.php",
+            dataType:"json",
+            data:{"val1":"abc","val2":123,"val3":"456"},
+            beforeSend:function(){
+              //some js code
+            },
+            success:function(msg){
+              console.log(msg)
+            },
+            error:function(){
+              console.log("error")
+            }
+          })
