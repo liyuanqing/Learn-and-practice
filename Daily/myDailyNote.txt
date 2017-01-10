@@ -6,8 +6,33 @@ react全家桶：
 4、ES6(babel转译)
 5、路由（react-router）
 6、Flux（Flux库——Redux）
-
-
+react初始化state的方法（3种）
+（1）es5方法：
+//ES5
+var Video = React.createClass({
+    getInitialState: function() {
+        return {
+            loopsRemaining: this.props.maxLoops,
+        };
+    },
+})
+（2）es6方法1：
+//ES6
+class Video extends React.Component {
+    state = {
+        loopsRemaining: this.props.maxLoops,
+    }
+}
+（3）es6方法2：（在我的项目中使用的方法“在构造函数中初始化”）
+//ES6
+class Video extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            loopsRemaining: this.props.maxLoops,
+        };
+    }
+}
 js原生ajax
         function ajax() {
                   //先声明一个异步请求对象
@@ -101,7 +126,7 @@ js方jq实现ajax
           }
         }
 
-        
+
       //调用代码
       ajax({
             type:"POST",
