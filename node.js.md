@@ -1,30 +1,30 @@
-##node服务器构建
+## node服务器构建
 
-###一、构建环境说明
-	1.服务器系统要求：
+### 一、构建环境说明
+	1. 服务器系统要求：
 		支持 macOS，Linux，Windows，示例采用centos7.2
-	2.硬件配置要求：
+	2. 硬件配置要求：
 		根据实际项目进行选择
-	3.node版本要求：
+	3. node版本要求：
 		>6.0.0建议使用lts版本
-	4.node.js平台的web应用框架
+	4. node.js平台的web应用框架
 		可选的有express、koa、egg等。
-###二、操作步骤
+### 二、操作步骤
 	1.操作系统安装
 		可以使用阿里云、腾讯云、电信云、亚马逊云等云服务器或本地安装虚拟机抑或当前系统进行操作，示例采用阿里云进行部署：
 		创建ECS示例选择公共镜像centos7.2，安装成功后使用root用户登录linux实例。
 	2.部署node.js环境——二进制文件安装或者源码安装后进行编译，示例采用二进制文件安装
 		下载压缩包至系统指定目录，解压后，在bin文件夹中就已存在node和npm，无需手工编译。
 		详细安装步骤：
-			1.wget命令下载node.js安装包。
+			1. wget命令下载node.js安装包。
 			wget https:nodejs.org/dist/v6.9.5/node-v6.9.5-linux-x64.tar.xz
-			2.解压文件
+			2. 解压文件
 			tar xvf node-v6.9.5-linux-x64.tar.xz
-			3.创建软连接，使node和npm命令全局有效
+			3. 创建软连接，使node和npm命令全局有效
 			ln -s /root/node-v6.9.5-linux-x64/bin/node /usr/local/bin/node
 			ln -s /root/node-v6.9.5-linux-x64/bin/npm /usr/local/bin/npm
-			4.查看node、npm版本
-			5.node.js环境安装完毕
+			4. 查看node、npm版本
+			5. node.js环境安装完毕
 			另：软件默认安装在/root/node-v6.9.5-linux-x64/目录下。如果需要将该软件安装到其他目录（如：/opt/node/）下，请进行如下操作：
 
 			mkdir -p /opt/node/
@@ -102,8 +102,8 @@
 		5、在浏览器中输入http://IP:端口号 访问项目。
 		
 		到这里我们的Node.js项目就部署完成了。
-###ps：
-	1.阿里云端口配置
+### ps：
+	1. 阿里云端口配置
 		阿里云默认开启22、80、3389端口，应用启动时端口非80端口时，需要在安全规则内进行相应配置，否则端口无法使用。
 		
 		通过ssh命令行启动node.js服务时，关闭链接服务会自动停止，若需要应用一直运行，需要添加forever，为了能够全局使用建议全局安装。
